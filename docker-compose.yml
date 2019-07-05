@@ -1,0 +1,21 @@
+version: '3'
+services:
+  front:
+    build:
+      context: ./forma-docker-frontend
+    ports:
+      - "8080:80"
+    networks:
+      - app_net
+  nodeapp:
+    image: edgendadevops/devops-docker-nodeapp:0
+    environment:
+      - REDIS_HOST=redisdb
+    networks:
+      - app_net
+  redisdb:
+    image: redis
+    networks:
+      - app_net
+networks:
+  app_net:
